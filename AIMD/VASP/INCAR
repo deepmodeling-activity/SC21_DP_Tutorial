@@ -1,0 +1,28 @@
+# Global Parameters
+ISTART  =  0
+LREAL   =  Auto
+ENCUT   =  500
+PREC    =  Normal
+ALGO    =  Normal
+LWAVE   = .FALSE.
+LCHARG  = .FALSE.
+ADDGRID = .TRUE.
+NPAR    =  2
+NWRITE  =  2
+ISYM    =  0
+
+# Electronic and Ionic Relaxation
+ISMEAR  =  0
+SIGMA   =  0.1
+NELM    =  100
+NELMIN  =  5
+EDIFF   =  1E-06
+
+# Molecular Dynamics
+IBRION  =  0              
+SMASS   =  0             
+MDALGO  =  2            
+POTIM   =  0.5             
+TEBEG   =  300           
+TEEND   =  300                  
+NSW     =  1000

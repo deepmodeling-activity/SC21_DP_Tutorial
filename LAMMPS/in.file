@@ -1,0 +1,30 @@
+#Initial setup
+dimension         3
+units             metal
+boundary          p p s
+atom_style        atomic
+read_data         data
+
+#Initializde
+pair_style 	      deepmd graphene-compress.pb
+pair_coeff 	      
+
+neighbor          2.0 nsq
+neigh_modify      every 1 delay 5 check yes
+comm_modify       mode single cutoff 10.0 vel yes
+
+#velocity
+velocity          all create 300.0 15756206 mom yes rot yes dist gaussian
+timestep          0.001
+thermo            100
+thermo_modify     flush yes
+
+#NVT
+fix               nvt all nvt temp 300.0 300.0 0.5 drag 0.2
+run               10000
+unfix             nvt
+
+#NVE
+fix               nve all nve
+run               10000
+print             "MD finished successfully!!"
