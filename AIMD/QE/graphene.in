@@ -1,28 +1,38 @@
  &control
-    calculation='md'
-    restart_mode='from_scratch',
-    pseudo_dir = './pseudo',
-    outdir='./tempdir/',
-    dt=10.335, !10.335 a.u. = 0.5 fs
+    calculation='cp'
+    restart_mode='restart',
+    prefix = "graphene",
+    pseudo_dir = './',
+    outdir='./out',
+    dt=2.D0,
     nstep=100,
-    disk_io='high'
- /
+    isave=100,
+    tstress = .true.,
+    tprnfor = .true.,
+    iprint = 5,
+    ndr = 68,
+    ndw = 69, 
+    max_seconds = 85000,
+/
  &system
     ibrav= 0, nat=  98, ntyp= 1,
-    ecutwfc = 36.75, nosym=.true. !kinetic energy cutoff is 36.75 Rydberg = 500 eV.
+    ecutwfc = 85.0D0,
  /
- &electrons
-    conv_thr =  1.0d-6,
-    mixing_beta = 0.7
- /
- &ions
-    ion_temperature='rescaling'
-    tempw=300.D0
-    nraise=1
-    tolp=1.0
-    pot_extrapolation='second-order'
-    wfc_extrapolation='second-order'
- /
+&ELECTRONS
+  electron_dynamics     = "verlet",
+  emass                 = 100.D0,
+  emass_cutoff          = 25.D0,
+  ortho_max             = 800,
+  electron_maxstep      = 500,
+/
+&IONS
+   ion_temperature  = "nose",
+   fnosep           = 60,
+   tempw            = 300.0,
+   nhptyp           = 0,  ! single NH chain
+   ndega            = -3,
+   ion_dynamics     = "verlet",
+/
 CELL_PARAMETERS angstrom
  17.2787614620889798    0.0000000000000000    0.0000000000000000
  -8.6393807313956792   14.9638463720634718    0.0000000000000000
@@ -128,5 +138,3 @@ ATOMIC_POSITIONS crystal
  C  0.6666669101520026  0.9047616721337112  0.5000000000000000
  C  0.8095240530091454  0.9047616721337112  0.5000000000000000
  C  0.9523811958662884  0.9047616721337112  0.5000000000000000
-K_POINTS {automatic}
- 1 1 1 0 0 0
